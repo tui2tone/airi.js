@@ -23,6 +23,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _template = require("./template");
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var defaultConfig = {
@@ -59,7 +61,7 @@ var Instance = function () {
 		key: "render",
 		value: function render() {
 			/* render a template */
-			this.elm.innerHTML = this.template;
+			this.elm.innerHTML = (0, _template.RenderTemplate)(this.template, this.data);
 		}
 	}]);
 
@@ -67,5 +69,19 @@ var Instance = function () {
 }();
 
 exports.default = Instance;
+
+},{"./template":3}],3:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.RenderTemplate = RenderTemplate;
+function RenderTemplate(template, data) {
+	var getDataBinding = template.match(/{{(.*)}}/);
+	var rendered = template.replace(getDataBinding[0], data[getDataBinding[1]]);
+
+	return rendered;
+}
 
 },{}]},{},[1]);

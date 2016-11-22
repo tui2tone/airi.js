@@ -3,5 +3,13 @@ var airi = new Airi({
 	data: {
 		message: "Hello World"
 	},
-	template: "<div>{{message}}</div>"
+	methods: {
+		handleClick: function() {
+			alert("Clicked")
+		}
+	},
+	template: "<div>\
+							{{message}}\
+							<button ai-on:click='handleClick'></button>
+						</div>"
 });
